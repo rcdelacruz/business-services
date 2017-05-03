@@ -1,0 +1,196 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Test API
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+x-a127-config: {}
+x-a127-services: {}
+paths:
+  /file-metadata/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: anaplan
+    x-a127-apply: {}
+    get:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: getMetaData
+      parameters:
+        - name: id
+          in: path
+          description: Number exportId of the export definition.
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /file-list:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: anaplan
+    x-a127-apply: {}
+    get:
+      description: Get the list of export files
+      # used as the method name of the controller
+      operationId: getFileList
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /task-list/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: anaplan
+    x-a127-apply: {}
+    get:
+      description: List the tasks of this export action
+      # used as the method name of the controller
+      operationId: getTaskList
+      parameters:
+        - name: id
+          in: path
+          description: Number exportId of the export definition.
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /data-chunk/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: anaplan
+    x-a127-apply: {}
+    get:
+      description: Get the data in the form of a chunk or chunks
+      # used as the method name of the controller
+      operationId: getData
+      parameters:
+        - name: id
+          in: path
+          description: Number exportId of the export definition.
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /exports:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: anaplan
+    x-a127-apply: {}
+    get:
+      description: List the EXPORT actions of the specified Model
+      # used as the method name of the controller
+      operationId: getExports
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /export-task/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: anaplan
+    x-a127-apply: {}
+    post:
+      description: Create a task with the specified exportID, which returns the newly-created taskId
+      # used as the method name of the controller
+      operationId: setExportTask
+      parameters:
+        - name: id
+          in: path
+          description: Number exportId of the export definition.
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /export-task/{export_id}/status/{task_id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: anaplan
+    x-a127-apply: {}
+    get:
+      description: Get the status of the specified EXPORT task
+      # used as the method name of the controller
+      operationId: getTaskStatus
+      parameters:
+        - name: export_id
+          in: path
+          description: Number exportId of the export definition.
+          required: true
+          type: string
+        - name: task_id
+          in: path
+          description: Number taskId of the export definition.
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+# complex objects have schema definitions
+definitions:
+  HelloWorldResponse:
+    type: string
+  ErrorResponse:
+    type: string
