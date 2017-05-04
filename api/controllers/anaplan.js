@@ -136,7 +136,7 @@ function setExportTask(req, res) {
       'Authorization': BASIC_AUTH,
       'Content-Type': 'application/json'
     },
-    body: "{\"localeName\": \"en_US\"}"
+    body: "{ \"localeName\": \"en_US\"}"
   }, function (error, response, body) {
     console.log('Status:', response.statusCode);
     console.log('Headers:', JSON.stringify(response.headers));
